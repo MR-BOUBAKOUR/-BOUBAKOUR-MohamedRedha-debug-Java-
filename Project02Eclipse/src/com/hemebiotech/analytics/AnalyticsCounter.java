@@ -1,7 +1,5 @@
 package com.hemebiotech.analytics;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,17 +19,12 @@ public class AnalyticsCounter {
 			// sinon on initialise à 1
 			counters.put(symptom, counters.getOrDefault(symptom, 0) + 1);
 		});
-
+		// Tri des symptômes par ordre alphabétique en utilisant un TreeMap
 		Map<String, Integer> sortedCounters = new TreeMap<>(counters);
 
-		// Écriture des résultats dans un fichier "result.out"
-		try (FileWriter writer = new FileWriter("result.txt")) {
-			// Boucle pour écrire chaque symptôme et son nombre d'occurrences
-			for (Map.Entry<String, Integer> entry : sortedCounters.entrySet()) {
-				writer.write(entry.getKey() + ": " + entry.getValue() + "\n");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		// Ecriture des symptoms ainsi que leur fréquence dans le fichiers cible
+		// "result.txt"
+		WriteSymptomDataToFile symptomDataWriter = new WriteSymptomDataToFile("result.txt");
+		symptomDataWriter.writeSymptoms(sortedCounters);
 	}
 }

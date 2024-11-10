@@ -38,10 +38,9 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 					results.add(line);
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.err.println("Erreur lors de la lecture du fichier : " + filepath + e.getMessage());
 			}
 		}
-
 		return results;
 	}
 }
