@@ -6,25 +6,39 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class AnalyticsCounter {
-	public static void main(String args[]) throws Exception {
+	private ISymptomReader reader;
+	private ISymptomWriter writer;
 
-		// Lecture des symptômes à partir du fichier "symptoms.txt"
-		ReadSymptomDataFromFile symptomDataReader = new ReadSymptomDataFromFile("symptoms.txt");
-		List<String> symptoms = symptomDataReader.GetSymptoms();
+	public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
+		this.reader = reader;
+		this.writer = writer;
+	}
 
-		// Comptage des occurrences de chaque symptôme
-		Map<String, Integer> counters = new HashMap<String, Integer>();
-		symptoms.forEach(symptom -> {
-			// Si le symptôme est déjà présent dans la map, on incrémente son compteur,
-			// sinon on initialise à 1
-			counters.put(symptom, counters.getOrDefault(symptom, 0) + 1);
+	public List<String> getSymptoms() {
+		return reader.getSymptoms();
+	}
+
+	public Map<String, Integer> countSymptoms(List<String> symptoms) {
+		Map<String, Integer> counters = new HashMap<>();
+		symptoms.forEach(result -> {
+			counters.put(result, counters.getOrDefault(result, 0) + 1);
 		});
-		// Tri des symptômes par ordre alphabétique en utilisant un TreeMap
-		Map<String, Integer> sortedCounters = new TreeMap<>(counters);
 
-		// Ecriture des symptoms ainsi que leur fréquence dans le fichiers cible
-		// "result.txt"
-		WriteSymptomDataToFile symptomDataWriter = new WriteSymptomDataToFile("result.txt");
-		symptomDataWriter.writeSymptoms(sortedCounters);
+		return counters;
+	}
+
+	public Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms) {
+		return new TreeMap<>(symptoms);
+	}
+
+	public void writeSymptoms(Map<String, Integer> symptoms) {
+		writer.writeSymptoms(symptoms);
+	}
+
+	public void exe() {
+		List<String> symptoms = getSymptoms();
+		Map<String, Integer> countedSymptoms = countSymptoms(symptoms);
+		Map<String, Integer> sortedSymptoms = sortSymptoms(countedSymptoms);
+		writeSymptoms(sortedSymptoms);
 	}
 }
