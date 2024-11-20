@@ -1,8 +1,10 @@
 # Project_DA_Java_EN_Come_to_the_Rescue_of_a_Java_Application
 
-Java version :
+## Java Version
 
 - `java version "21.0.5" 2024-10-15 LTS`
+
+## Libraries Used
 
 The project uses standard Java libraries. Specifically, the following classes from the standard library are used:
 
@@ -14,6 +16,8 @@ The project uses standard Java libraries. Specifically, the following classes fr
 - `java.util.Map`
 - `java.util.HashMap`
 - `java.util.TreeMap`
+
+## Steps to Run the Project
 
 1. **Install JDK 21** (skip if already installed)
 
