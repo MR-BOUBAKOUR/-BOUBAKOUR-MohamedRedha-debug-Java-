@@ -30,7 +30,6 @@ public class Main {
             // Execute the analysis: read symptoms, count, sort, and write the results
             analyticsCounter.exe();
 
-            System.out.println("Analysis completed. Results are saved in the result file.");
         } catch (Exception e) {
             System.err.println("An unexpected error occurred: " + e.getMessage());
         }

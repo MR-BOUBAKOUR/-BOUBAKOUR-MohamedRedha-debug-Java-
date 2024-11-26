@@ -77,10 +77,21 @@ public class AnalyticsCounter {
 	 * It reads, counts, sorts, and writes the symptoms to the destination.
 	 */
 	public void exe() {
-		List<String> symptoms = getSymptoms();
-		Map<String, Integer> countedSymptoms = countSymptoms(symptoms);
-		Map<String, Integer> sortedSymptoms = sortSymptoms(countedSymptoms);
-		writeSymptoms(sortedSymptoms);
-	}
+		try {
+			List<String> symptoms = getSymptoms();
 
+			if (symptoms == null || symptoms.isEmpty()) {
+				throw new Exception("No symptoms found.");
+			}
+
+			Map<String, Integer> countedSymptoms = countSymptoms(symptoms);
+			Map<String, Integer> sortedSymptoms = sortSymptoms(countedSymptoms);
+			writeSymptoms(sortedSymptoms);
+
+			System.out.println("Analysis completed. Results are saved in the result file.");
+
+		} catch (Exception e) {
+			System.err.println("An error occurred during the analysis.");
+		}
+	}
 }

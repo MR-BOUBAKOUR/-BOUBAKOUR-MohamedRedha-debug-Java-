@@ -36,7 +36,7 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
                 writer.write(entry.getKey() + " : " + entry.getValue() + "\n");
             }
         } catch (Exception e) {
-            System.err.println("Erreur lors de l'écriture dans le fichier : " + filepath + e.getMessage());
+            System.err.println("Erreur lors de l'écriture dans le fichier : " + e.getMessage());
         }
     }
 
